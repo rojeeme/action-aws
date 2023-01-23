@@ -20,10 +20,10 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1
       with:
         role: arn:aws:iam::011974343726:role/ec2-full-action
-        provider: openid
+        # provider: openid
         # openid-client-id: <YOUR_OPENID_CLIENT_ID>
         # openid-client-secret: ${{ secrets.OPENID_CLIENT_SECRET }}
-        openid-provider-url: https://token.actions.githubusercontent.com
+        # openid-provider-url: https://token.actions.githubusercontent.com
 
     - name: Create EC2 instance
       run: |
