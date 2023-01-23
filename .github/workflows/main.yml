@@ -30,3 +30,4 @@ jobs:
         aws ec2 run-instances \
           --image-id ami-01234567890abcdef0 \
           --instance-type t2.micro \
+          --region us-west-2
