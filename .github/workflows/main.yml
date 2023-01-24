@@ -19,7 +19,7 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assum: arn:aws:iam::011974343726:role/ec2-full-action
+        role-to-assume: arn:aws:iam::011974343726:role/ec2-full-action
         # provider: openid
         # openid-client-id: <YOUR_OPENID_CLIENT_ID>
         # openid-client-secret: ${{ secrets.OPENID_CLIENT_SECRET }}
