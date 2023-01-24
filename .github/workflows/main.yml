@@ -21,6 +21,7 @@ jobs:
       with:
         role-to-assume: arn:aws:iam::011974343726:role/ec2-full-action
         aws-region: us-west-2
+
         # provider: openid
         # openid-client-id: <YOUR_OPENID_CLIENT_ID>
         # openid-client-secret: ${{ secrets.OPENID_CLIENT_SECRET }}
@@ -30,4 +31,4 @@ jobs:
       run: |
         aws ec2 run-instances \
           --image-id ami-01234567890abcdef0 \
-          --instance-type t2.micro \
+          --instance-type t2.micro 
