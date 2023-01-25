@@ -16,15 +16,32 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Get GitHub token
+    id: github-token
+    uses: actions/github-script@v3
+    with:
+    script: |
+      const response = await github.auth.createToken();
+      console.log(`The token is: ${response.data.token}`);
+      return response.data.token;
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        role-to-assume: arn:aws:iam::011974343726:role/admin-aws
-        aws-region: us-east-1
-
-
+    run: |
+    echo ${{ steps.github-token.outputs.token }} > token.json
+    aws sts assume-role-with-web-identity \
+      --role-arn arn:aws:iam::011974343726:role/admin-aws \
+      --role-session-name ${{ github.actor }} \
+      --web-identity-token file://token.json \
+      --duration-seconds 3600
+  env:
+        AWS_REGION: us-east-1
+        AWS_PROFILE: default
     - name: Create EC2 instance
-      run: |
+  run: |
         aws ec2 run-instances \
           --image-id ami-01234567890abcdef0 \
           --instance-type t2.micro 
+
+
+
+
+
