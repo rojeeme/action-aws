@@ -6,8 +6,8 @@ on:
       - main
 
 permissions:
-  id-token: write
-  contents: read
+  id-token: write # This is required for requesting the JWT
+  contents: read  # This is required for actions/checkout
 
 jobs:
   create-ec2-instance:
@@ -19,13 +19,9 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::011974343726:role/ec2-full-action
+        role-to-assume: arn:aws:iam::011974343726:role/admin-aws
         aws-region: us-west-2
 
-        # provider: openid
-        # openid-client-id: <YOUR_OPENID_CLIENT_ID>
-        # openid-client-secret: ${{ secrets.OPENID_CLIENT_SECRET }}
-        # openid-provider-url: https://token.actions.githubusercontent.com
 
     - name: Create EC2 instance
       run: |
