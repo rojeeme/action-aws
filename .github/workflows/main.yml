@@ -20,7 +20,8 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1
       with:
         role-to-assume: arn:aws:iam::011974343726:role/admin-aws
-        aws-region: us-east-1
+        role-session-name: samplerolesession
+        aws-region: 'us-east-1'
 
 
     - name: Create EC2 instance
