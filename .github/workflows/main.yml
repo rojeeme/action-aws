@@ -7,26 +7,25 @@ on:
 
 permissions:
   id-token: write # This is required for requesting the JWT
-  contents: read  # This is required for actions/checkout
+  contents: read # This is required for actions/checkout
 
 jobs:
   create-ec2-instance:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        role-to-assume: arn:aws:iam::011974343726:role/admin-aws
-        role-session-name: samplerolesession
-        aws-region: 'us-west-2'
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::011974343726:role/admin-aws
+          role-session-name: samplerolesession
+          aws-region: "us-west-2"
 
+      - name: Create EC2 instance
+        run: |
+          aws ec2 run-instances \
+            --image-id ami-0ceecbb0f30a902a6 \
+            --instance-type t2.micro 
 
-    - name: Create EC2 instance
-      run: |
-        aws ec2 run-instances \
-          --image-id ami-0ceecbb0f30a902a6 \
-          --instance-type t2.micro 
-          
